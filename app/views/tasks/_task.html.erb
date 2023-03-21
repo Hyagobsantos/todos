@@ -1,0 +1,22 @@
+<div id="<%= dom_id task %>">
+  <p>
+    <strong>Titulo:</strong>
+    <%= task.titulo %>
+  </p>
+
+  <p>
+    <strong>Descricao:</strong>
+    <%= task.descricao %>
+  </p>
+
+  <p>
+    <strong>Vencimento:</strong>
+    <%= task.vencimento %>
+  </p>
+
+  <p>
+    <strong>Pronto:</strong>
+    <%= task.done == true ? "Sim" : "Não" %>
+  </p>
+
+</div>

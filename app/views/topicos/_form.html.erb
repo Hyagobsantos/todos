@@ -1,0 +1,20 @@
+<%= form_with(model: topico) do |form| %>
+  <% if topico.errors.any? %>
+    <div style="color: red">
+      <ul>
+        <% topico.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div>
+    <%= form.label :titulo, style: "display: block" %>
+    <%= form.text_field :titulo %>
+  </div>
+
+  <div>
+    <%= form.submit%>
+  </div>
+<% end %>
