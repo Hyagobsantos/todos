@@ -11,6 +11,7 @@
   </head>
 
   <body>
+    <%= yield(:user_panel) if content_for(:user_panel) %>
     <%= yield %>
   </body>
 </html>

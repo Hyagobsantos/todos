@@ -1,5 +1,6 @@
 class TopicosController < ApplicationController
   before_action :set_topico, only: [:show, :edit, :update, :destroy]
+
   def index
     @topicos = Topico.all
   end

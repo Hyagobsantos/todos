@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  devise_for :users
   resources :tasks
 
   resources :topicos do # tarefas é um recurso de topicos
@@ -8,6 +9,10 @@ Rails.application.routes.draw do
 
   # Defines the root path route ("/")
   # root "articles#index"
+
+  #define root in homepage
+
+  root to: "welcome#index"
 
   # get "/topicos", to: "topicos#index"
   # post "/topicos", to: "topicos#create"

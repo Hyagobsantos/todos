@@ -1,0 +1,7 @@
+<% content_for :user_panel do %>
+  <div>
+    <%= button_to "Sign Out", destroy_user_session_path, method: :delete %>
+  </div>
+<% end %>
+
+<%= render template: "layouts/application" %>
