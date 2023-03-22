@@ -2,7 +2,7 @@ class TopicosController < ApplicationController
   before_action :set_topico, only: [:show, :edit, :update, :destroy]
 
   def index
-    @topicos = Topico.all
+    @topicos = current_user.topicos
   end
 
   def show
@@ -17,6 +17,7 @@ class TopicosController < ApplicationController
 
   def create
     @topico = Topico.new(topico_params)
+    @topico.user = current_user
     if @topico.save
       redirect_to topico_url(@topico), notice: "Topico Criado"
     else

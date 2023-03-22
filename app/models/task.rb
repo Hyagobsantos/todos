@@ -4,4 +4,5 @@ class Task < ApplicationRecord
 
 
   belongs_to :topico
+  belongs_to :user
 end

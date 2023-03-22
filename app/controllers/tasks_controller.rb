@@ -3,7 +3,7 @@ class TasksController < ApplicationController
 
   # GET /tasks or /tasks.json
   def index
-    @tasks = Task.all
+    @tasks = current_user.tasks
   end
 
   # GET /tasks/1 or /tasks/1.json
@@ -13,7 +13,7 @@ class TasksController < ApplicationController
   # GET /tasks/new
   def new
     @task = Task.new
-    @topicos = Topico.order(:titulo)
+    @topicos = Topico.where("user_id = ?", current_user.id)
 
     @selected = params[:topico_id]
   end
@@ -26,13 +26,17 @@ class TasksController < ApplicationController
   # POST /tasks or /tasks.json
   def create
     @task = Task.new(task_params)
+    @task.user = current_user
 
     respond_to do |format|
       if @task.save
         format.html { redirect_to task_url(@task), notice: "Task was successfully created." }
         format.json { render :show, status: :created, location: @task }
       else
-        format.html { render :new, status: :unprocessable_entity }
+        format.html {
+          @topicos = current_users.topicos
+          render :new, status: :unprocessable_entity
+        }
         format.json { render json: @task.errors, status: :unprocessable_entity }
       end
     end
