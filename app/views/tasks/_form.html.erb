@@ -32,6 +32,17 @@
   </div>
 
   <div>
+    <%= form.label :topico, style: "display: block" %>
+    <%= form.collection_select(:topico_id,
+                               @topicos,
+                               :id,
+                               :titulo,
+                               prompt: "Escolha um Tópico",
+                               selected: @selected
+        ) %>
+  </div>
+
+  <div>
     <%= form.submit %>
   </div>
 <% end %>

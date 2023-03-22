@@ -13,10 +13,14 @@ class TasksController < ApplicationController
   # GET /tasks/new
   def new
     @task = Task.new
+    @topicos = Topico.order(:titulo)
+
+    @selected = params[:topico_id]
   end
 
   # GET /tasks/1/edit
   def edit
+    @topicos = Topico.order(:titulo)
   end
 
   # POST /tasks or /tasks.json
@@ -65,6 +69,6 @@ class TasksController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def task_params
-      params.require(:task).permit(:titulo, :descricao, :vencimento, :done)
+      params.require(:task).permit(:titulo, :descricao, :vencimento, :done, :topico_id)
     end
 end

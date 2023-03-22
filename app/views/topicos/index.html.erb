@@ -1,3 +1,7 @@
+<% if notice.present? %>
+  <p style="color: green"><%= notice %></p>
+<% end %>
+
 <div>
   <% @topicos.each do |t| %>
     <%= render t, locals: {topico: t} %>
