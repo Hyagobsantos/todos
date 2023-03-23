@@ -6,4 +6,8 @@ class User < ApplicationRecord
 
   has_many :tasks
   has_many :topicos
+
+  def too_lazy?
+    tasks.incompletas.count > 3
+  end
 end

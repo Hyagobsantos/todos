@@ -20,7 +20,7 @@ class TasksController < ApplicationController
 
   # GET /tasks/1/edit
   def edit
-    @topicos = Topico.order(:titulo)
+    @topicos = Topico.where("user_id = ?", current_user.id)
   end
 
   # POST /tasks or /tasks.json
@@ -30,6 +30,9 @@ class TasksController < ApplicationController
 
     respond_to do |format|
       if @task.save
+        if current_user.too_lazy?
+          UserMailer.with(user: current_user).too_lazy.deliver_later
+        end
         format.html { redirect_to task_url(@task), notice: "Task was successfully created." }
         format.json { render :show, status: :created, location: @task }
       else
