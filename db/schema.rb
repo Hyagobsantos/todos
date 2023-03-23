@@ -10,7 +10,10 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_03_22_193219) do
+ActiveRecord::Schema[7.0].define(version: 2023_03_23_150712) do
+  create_table "data_migrations", primary_key: "version", id: :string, force: :cascade do |t|
+  end
+
   create_table "tasks", force: :cascade do |t|
     t.string "titulo"
     t.text "descricao"
@@ -20,6 +23,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_03_22_193219) do
     t.boolean "done"
     t.integer "topico_id"
     t.integer "user_id"
+    t.string "gif"
     t.index ["topico_id"], name: "index_tasks_on_topico_id"
     t.index ["user_id"], name: "index_tasks_on_user_id"
   end

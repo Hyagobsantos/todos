@@ -89,14 +89,14 @@ RSpec.describe "/tasks", type: :request do
   describe "PATCH /update" do
     context "with valid parameters" do
       let(:new_attributes) {
-        skip("Add a hash of attributes valid for your model")
+        {titulo: "Arrumar a cama"}
       }
 
       it "updates the requested task" do
         task = Task.create! valid_attributes
         patch task_url(task), params: { task: new_attributes }
         task.reload
-        skip("Add assertions for updated state")
+        expect(task.titulo).to eq "Arrumar a cama"
       end
 
       it "redirects to the task" do

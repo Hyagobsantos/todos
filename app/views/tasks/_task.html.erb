@@ -19,6 +19,10 @@
     <%= task.done == true ? "Sim" : "Não" %>
   </p>
 
+  <% if task.gif.present? %>
+    <iframe src="<%= task.gif %>" width="380" height="280"></iframe>
+  <% end %>
+
 </div>
 
 

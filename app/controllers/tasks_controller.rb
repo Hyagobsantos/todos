@@ -13,14 +13,14 @@ class TasksController < ApplicationController
   # GET /tasks/new
   def new
     @task = Task.new
-    @topicos = Topico.where("user_id = ?", current_user.id)
+    @topicos = current_user.topicos.order(:titulo)
 
     @selected = params[:topico_id]
   end
 
   # GET /tasks/1/edit
   def edit
-    @topicos = Topico.where("user_id = ?", current_user.id)
+    @topicos = current_user.topicos.order(:titulo)
   end
 
   # POST /tasks or /tasks.json
@@ -32,6 +32,7 @@ class TasksController < ApplicationController
       if @task.save
         if current_user.too_lazy?
           UserMailer.with(user: current_user).too_lazy.deliver_later
+          SearchGifJob.perform_later(@task)
         end
         format.html { redirect_to task_url(@task), notice: "Task was successfully created." }
         format.json { render :show, status: :created, location: @task }
@@ -52,7 +53,10 @@ class TasksController < ApplicationController
         format.html { redirect_to task_url(@task), notice: "Task was successfully updated." }
         format.json { render :show, status: :ok, location: @task }
       else
-        format.html { render :edit, status: :unprocessable_entity }
+        format.html {
+          @topicos = current_users.topicos
+          render :edit, status: :unprocessable_entity
+        }
         format.json { render json: @task.errors, status: :unprocessable_entity }
       end
     end
